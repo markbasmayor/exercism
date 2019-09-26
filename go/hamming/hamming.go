@@ -8,10 +8,10 @@ import "errors"
 // Returns an error if the strand lenghts are not equal.
 func Distance(a, b string) (int, error) {
 	if len(a) != len(b) {
-		return 0, errors.New("DNA strands must be of the same length.")
+		return 0, errors.New("DNA strands must be of equal length.")
 	}
 	distance := 0
-	for pos, _ := range a {
+	for pos := range a {
 
 		if a[pos] != b[pos] {
 			distance++
