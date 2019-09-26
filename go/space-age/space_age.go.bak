@@ -1,0 +1,32 @@
+package main
+
+import (
+    "math"
+    "strings"
+    "fmt"
+)
+
+var orbits = map[string]float64 {
+    "earth":        31557600,
+    "mercury":      7600543.81992,
+    "venus":        19414149.052176,
+    "mars":         59354032.69008,
+    "jupiter":      374355659.124,
+    "saturn":       929292362.8848,
+    "uranus":       2651370019.3296,
+    "neptune":      5200418560.032,
+}
+
+
+
+func main() {
+    out:= Age(2134835688, "Mercury")
+    fmt.Println(out)
+}
+
+
+func Age(age float64, planet string) float64 {
+    planet = strings.ToLower(planet)
+    fmt.Println(planet)
+    return math.Round(age / orbits[planet] * 100) / 100
+}
