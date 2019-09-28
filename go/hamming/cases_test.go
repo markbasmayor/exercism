@@ -64,4 +64,16 @@ var testCases = []struct {
 		0,
 		true,
 	},
+	{ // handle identical multi-btye runes
+		"世界",
+		"世界",
+		0,
+		false,
+	},
+	{ // handle unidentical multi-btye runes
+		"界界界",
+		"世界世",
+		2,
+		false,
+	},
 }

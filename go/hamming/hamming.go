@@ -7,13 +7,15 @@ import "errors"
 // Distance takes two strings and computes the Hamming distance between the two.
 // Returns an error if the strand lenghts are not equal.
 func Distance(a, b string) (int, error) {
-	if len(a) != len(b) {
-		return 0, errors.New("DNA strands must be of equal length.")
+	ar, br := []rune(a), []rune(b)
+
+	if len(ar) != len(br) {
+		return 0, errors.New("DNA strands must be of equal length")
 	}
 	distance := 0
-	for pos := range a {
+	for pos := range ar {
 
-		if a[pos] != b[pos] {
+		if ar[pos] != br[pos] {
 			distance++
 		}
 	}
