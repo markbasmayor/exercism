@@ -17,7 +17,7 @@ import (
 	"strings"
 )
 
-var scoreMap = map[string]int{}
+var scoreMap = map[rune]int{}
 
 func init() {
 	var scoresForLetters = map[int]string{
@@ -32,7 +32,7 @@ func init() {
 
 	for score, letters := range scoresForLetters {
 		for _, letter := range letters {
-			scoreMap[string(letter)] = score
+			scoreMap[letter] = score
 		}
 	}
 }
@@ -42,7 +42,7 @@ func Score(word string) int {
 	word = strings.ToUpper(word)
 	total := 0
 	for _, char := range word {
-		total += scoreMap[string(char)]
+		total += scoreMap[char]
 	}
 	return total
 }
