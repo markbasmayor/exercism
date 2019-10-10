@@ -9,7 +9,7 @@ B, C, M, P                         3
 F, H, V, W, Y                      4
 K                                  5
 J, X                               8
-
+Q, Z                              10
 */
 package scrabble
 
@@ -17,41 +17,28 @@ import (
 	"strings"
 )
 
-var letterValues = map[rune]int{
-    'A': 1,
-    'B': 3,
-    'C': 3,
-    'D': 2,
-    'E': 1,
-    'F': 4,
-    'G': 2,
-    'H': 4,
-    'I': 1,
-    'J': 8,
-    'K': 5,
-    'L': 1,
-    'M': 3,
-    'N': 1,
-    'O': 1,
-    'P': 3,
-    'Q': 10,
-    'R': 1,
-    'S': 1,
-    'T': 1,
-    'U': 1,
-    'V': 4,
-    'W': 4,
-    'X': 8,
-    'Y': 4,
-    'Z': 10,
-}
-
 // Score calculates the total score for a word in scrabble.
 func Score(word string) int {
 	word = strings.ToUpper(word)
 	total := 0
 	for _, char := range word {
-		total += letterValues[char]
+		switch char {
+		case 'A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T':
+			total++
+		case 'D', 'G':
+			total += 2
+		case 'B', 'C', 'M', 'P':
+			total += 3
+		case 'F', 'H', 'V', 'W', 'Y':
+			total += 4
+		case 'K':
+			total += 5
+		case 'J', 'X':
+			total += 8
+		case 'Q', 'Z':
+			total += 10
+
+		}
 	}
 	return total
 }
