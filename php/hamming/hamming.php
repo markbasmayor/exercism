@@ -9,15 +9,12 @@ Remove this comment before submitting your exercise.
 
 function distance(string $strandA, string $strandB) : int
 {
-    if (strlen($strandA) != strlen($strandB)) {
+    if (mb_strlen($strandA) != mb_strlen($strandB)) {
         throw new InvalidArgumentException('DNA strands must be of equal length.');
     }
 
-    $distance = 0;
-    for ($pos = 0; $pos < strlen($strandA); $pos++) {
-        if ($strandA[$pos] != $strandB[$pos]) {
-            $distance++;
-        }
-    }
-    return $distance;
+    $a = str_split($strandA);
+    $b = str_split($strandB);
+
+    return count(array_diff_assoc($a,$b));
 }
