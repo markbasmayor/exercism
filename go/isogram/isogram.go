@@ -4,29 +4,21 @@ import (
 	"strings"
 )
 
-// IsIsogram determines if a word is an isogram or not.
-// An isogram (also known as a "nonpattern word") is a word or phrase without a repeating letter, however spaces and hyphens are allowed to appear multiple times.
+// IsIsogram determines if a word is an isogram or not. An isogram (also known
+// as a "nonpattern word") is a word or phrase without a repeating letter,
+// however spaces and hyphens are allowed to appear multiple times.
 func IsIsogram(word string) bool {
 	word = strings.ToUpper(word)
-	usedChars := []rune{}
+	seen := map[rune]bool{}
 
-	for _, char := range word {
-		if char == ' ' || char == '-' {
+	for _, r := range word {
+		if r == ' ' || r == '-' {
 			continue
 		}
-		if search(usedChars, char) == true {
+		if seen[r] {
 			return false
 		}
-		usedChars = append(usedChars, char)
+		seen[r] = true
 	}
 	return true
-}
-
-func search(chars []rune, searchKey rune) bool {
-	for _, char := range chars {
-		if char == searchKey {
-			return true
-		}
-	}
-	return false
 }
