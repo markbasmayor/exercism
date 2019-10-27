@@ -8,31 +8,28 @@ import (
 // Valid returns true if the given number is valid based on the Luhn's
 // algorithm, otherwise it returns false
 func Valid(number string) bool {
-	number = strings.TrimSpace(number)
+	number = strings.ReplaceAll(number, " ", "")
 	length := len(number)
 	if length <= 1 {
 		return false
 	}
-
 	runes := []rune(number)
-	total, d, ctr := 0, 0, 0
+	total, d := 0, 0
+	double := length%2 == 0
 
-	for i := length - 1; i >= 0; i-- {
-		if runes[i] == ' ' {
-			continue
-		}
-		if !unicode.IsDigit(runes[i]) {
+	for _, r := range runes {
+		if !unicode.IsDigit(r) {
 			return false
 		}
-		d = int(runes[i] - '0')
-		if ctr%2 == 1 {
+		d = int(r - '0')
+		if double {
 			d *= 2
 			if d > 9 {
 				d -= 9
 			}
 		}
 		total += d
-		ctr++
+		double = !double
 	}
 	return total%10 == 0
 }
